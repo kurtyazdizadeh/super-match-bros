@@ -1,0 +1,57 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('/assets/images/lfz-background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  max-width: 1500px;
+  margin: auto;
+}
+.row {
+  width: 100%;
+  display: flex;
+  margin-bottom: .5rem;
+  justify-content: space-around;
+}
+.col-1 {
+  width: 8%;
+}
+.col-2 {
+  width: 16%;
+}
+.col-3 {
+  width: 24%;
+}
+.col-4 {
+  width: 32%;
+}
+.col-5 {
+  width: 40%;
+}
+.col-6 {
+  width: 48%;
+}
+.col-7 {
+  width: 56%;
+}
+.col-8 {
+  width: 64%;
+}
+.col-9 {
+  width: 72%;
+}
+.col-10 {
+  width: 80%;
+}
+.col-11 {
+  width: 88%;
+}
+.col-12 {
+  width: 100%;
+}

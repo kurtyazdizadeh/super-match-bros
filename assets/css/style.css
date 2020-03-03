@@ -1,1 +1,31 @@
-
+#title {
+  height: 10%;
+}
+#content {
+  height: 90%;
+}
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+}
+aside > .box {
+  background-color: #87ceeb;
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 1rem 0;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 90%;
+  padding: auto;
+}
+.card {
+  background-image: url('/assets/images/lfz-card.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 30%;
+}

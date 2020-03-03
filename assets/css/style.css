@@ -1,7 +1,7 @@
-#title {
+.title {
   height: 10%;
 }
-#content {
+.content {
   height: 90%;
 }
 aside {
@@ -24,8 +24,23 @@ main {
   padding: auto;
 }
 .card {
+  height: 30%;
+  position: relative;
+}
+.card-back {
   background-image: url('/assets/images/lfz-card.jpg');
   background-size: contain;
   background-repeat: no-repeat;
-  height: 30%;
+}
+.card-front,
+.card-back {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+}
+.hidden {
+  display: none;
 }

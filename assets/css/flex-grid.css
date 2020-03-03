@@ -6,6 +6,7 @@ body {
   background-image: url('/assets/images/lfz-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 .container {
   width: 100%;

@@ -41,6 +41,17 @@ main {
   background-position: center;
   position: absolute;
 }
+.modal {
+  background-color: chartreuse;
+  position: fixed;
+  top: 25%;
+  bottom: 25%;
+  left: 25%;
+  right: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .hidden {
   display: none;
 }

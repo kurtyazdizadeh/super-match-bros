@@ -7,7 +7,8 @@ var firstCardClicked = null,
     attempts = 0,
     gamesPlayed = 0,
     gameCards = document.getElementById('gameCards'),
-    modal = document.querySelector('.modal');
+    modal = document.querySelector('.modal'),
+    resetButton = document.getElementById('reset');
 
 function handleClick(event) {
   if (event.target.className.indexOf('card-back') === -1){
@@ -57,8 +58,30 @@ function displayStats() {
   attemptsElement.textContent = attempts;
 
   var accuracyElement = document.getElementById('accuracy');
-  accuracyElement.textContent = `${Math.trunc(matches/attempts*100)}%`;
+  accuracyElement.textContent = `${calcAccuracy(matches,attempts)}%`;
 
 }
 
+function calcAccuracy(matches, attempts) {
+  return matches/attempts ? Math.trunc(matches/attempts*100) : 0;
+}
+
+function resetGame() {
+  gamesPlayed++;
+  attempts = 0;
+  matches = 0;
+  modal.classList.add('hidden');
+  displayStats();
+  resetCards();
+}
+
+function resetCards() {
+  var hiddenCards = document.querySelectorAll('.card-back');
+
+  for (var i = 0; i < hiddenCards.length; i++){
+    hiddenCards[i].classList.remove('hidden');
+  }
+}
+
 gameCards.addEventListener('click', handleClick);
+resetButton.addEventListener('click', resetGame);

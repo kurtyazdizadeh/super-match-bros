@@ -10,6 +10,57 @@ var firstCardClicked = null,
     modal = document.querySelector('.modal'),
     resetButton = document.getElementById('reset');
 
+
+var cardFrontImages = [
+  'css-logo',
+  'docker-logo',
+  'github-logo',
+  'html-logo',
+  'js-logo',
+  'mysql-logo',
+  'node-logo',
+  'php-logo',
+  'react-logo',
+  'css-logo',
+  'docker-logo',
+  'github-logo',
+  'html-logo',
+  'js-logo',
+  'mysql-logo',
+  'node-logo',
+  'php-logo',
+  'react-logo'
+]
+
+function shuffleCards() {
+  for(var i = cardFrontImages.length-1; i > 0; i--){
+    var randomNum = Math.floor(Math.random() * i);
+    var placeholder = cardFrontImages[i];
+    cardFrontImages[i] = cardFrontImages[randomNum];
+    cardFrontImages[randomNum] = placeholder;
+  }
+  buildCardsOnDOM();
+}
+function buildCardsOnDOM() {
+  for(var j = 0; j < cardFrontImages.length; j++){
+    var cardContainer = document.createElement('div');
+    var cardBack = document.createElement('div');
+    var cardFront = document.createElement('div');
+
+    cardContainer.classList.add('card', 'col-2');
+    cardBack.classList.add('card-back');
+    cardFront.classList.add('card-front', cardFrontImages[j]);
+
+    cardContainer.append(cardFront, cardBack);
+    gameCards.appendChild(cardContainer);
+  }
+}
+function deleteCards() {
+  while (gameCards.firstElementChild){
+    gameCards.removeChild(gameCards.lastElementChild)
+  }
+}
+
 function handleClick(event) {
   if (event.target.className.indexOf('card-back') === -1){
     return;
@@ -36,7 +87,8 @@ function handleClick(event) {
       gameCards.addEventListener('click', handleClick);
       firstCardClicked = null;
       secondCardClicked = null;
-    } else {
+    }
+    else {
       attempts++;
       displayStats();
       setTimeout(() => {
@@ -45,7 +97,7 @@ function handleClick(event) {
         gameCards.addEventListener('click', handleClick);
         firstCardClicked = null;
         secondCardClicked = null;
-      }, 1500);
+      }, 1000);
     }
   }
 }
@@ -72,16 +124,11 @@ function resetGame() {
   matches = 0;
   modal.classList.add('hidden');
   displayStats();
-  resetCards();
+  deleteCards();
+  shuffleCards();
 }
 
-function resetCards() {
-  var hiddenCards = document.querySelectorAll('.card-back');
-
-  for (var i = 0; i < hiddenCards.length; i++){
-    hiddenCards[i].classList.remove('hidden');
-  }
-}
 
 gameCards.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
+shuffleCards();

@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'super_smash_4.1regular';
+    src: url('../fonts/super_smash_4_1_by_mucrush_d7zxu6d-webfont.woff2') format('woff2'),
+         url('../fonts/super_smash_4_1_by_mucrush_d7zxu6d-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -149,6 +149,7 @@ function resetGame() {
   gamesPlayed++;
   attempts = 0;
   matches = 0;
+  modal.classList.remove('opacity');
   modal.classList.add('hidden');
   displayStats();
   deleteCards();

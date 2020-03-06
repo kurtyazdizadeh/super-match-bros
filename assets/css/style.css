@@ -96,7 +96,7 @@ main {
   align-items: center;
   padding-left: 25px;
   opacity: 0;
-  transition: opacity 1s ease-in;
+  transition: opacity 1.5s ease-in;
 }
 .modal > button {
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);

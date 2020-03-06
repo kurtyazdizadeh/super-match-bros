@@ -1,44 +1,48 @@
 .captfalcon {
-  background-image: url('/assets/images/captfalcon.png');
+  background-image: url('../images/characters/captfalcon.png');
   background-color: white;
 }
 .dk {
-  background-image: url('/assets/images/dk.png');
+  background-image: url('../images/characters/dk.png');
+  background-color:white;
+}
+.fox {
+  background-image: url('../images/characters/fox.png');
   background-color:white;
 }
 .jigglypuff {
-  background-image: url('/assets/images/jigglypuff.png');
+  background-image: url('../images/characters/jigglypuff.png');
   background-color:white;
 }
 .kirby {
-  background-image: url('/assets/images/kirby.png');
+  background-image: url('../images/characters/kirby.png');
   background-color:white;
 }
 .link {
-  background-image: url('/assets/images/link.png');
+  background-image: url('../images/characters/link.png');
   background-color:white;
 }
 .luigi {
-  background-image: url('/assets/images/luigi.png');
+  background-image: url('../images/characters/luigi.png');
   background-color:white;
 }
 .mario {
-  background-image: url('/assets/images/mario.png');
+  background-image: url('../images/characters/mario.png');
   background-color:white;
 }
 .ness {
-  background-image: url('/assets/images/ness.png');
+  background-image: url('../images/characters/ness.png');
   background-color:white;
 }
 .pikachu {
-  background-image: url('/assets/images/pikachu.png');
+  background-image: url('../images/characters/pikachu.png');
   background-color:white;
 }
 .samus {
-  background-image: url('/assets/images/samus.png');
+  background-image: url('../images/characters/samus.png');
   background-color:white;
 }
 .yoshi {
-  background-image: url('/assets/images/yoshi.png');
+  background-image: url('../images/characters/yoshi.png');
   background-color:white;
 }

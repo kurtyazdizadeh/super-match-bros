@@ -10,13 +10,14 @@ var firstCardClicked = null,
     gamesPlayed = 0,
     gameCards = document.getElementById('gameCards'),
     modal = document.querySelector('.modal'),
+    victoryPose = document.querySelector('.victory-pose'),
     resetButton = document.getElementById('reset');
 
 
 var cardFrontImages = [
   'captfalcon',
   'dk',
-  'jigglypuff',
+  'fox',
   'kirby',
   'link',
   'luigi',
@@ -25,7 +26,7 @@ var cardFrontImages = [
   'samus',
   'captfalcon',
   'dk',
-  'jigglypuff',
+  'fox',
   'kirby',
   'link',
   'luigi',
@@ -41,9 +42,9 @@ function shuffleCards() {
     cardFrontImages[i] = cardFrontImages[randomNum];
     cardFrontImages[randomNum] = placeholder;
   }
-  buildCardsOnDOM();
+  renderCards();
 }
-function buildCardsOnDOM() {
+function renderCards() {
   for(var j = 0; j < cardFrontImages.length; j++){
     var cardContainer = document.createElement('div');
     var cardFlip = document.createElement('div');
@@ -88,8 +89,17 @@ function handleClick(event) {
       matches++;
       attempts++;
       displayStats();
+      var character = firstCardClasses.slice(11);
+      playCharacterCall(character);
+
       if (matches === maxMatches){
+        victoryPose.src = `./assets/images/${character}.png`;
+        victoryPose.alt = `${character} posing`;
         modal.classList.remove('hidden');
+        setTimeout(()=>{
+          modal.classList.add('opacity');
+        })
+        playVictory();
       }
       gameCards.addEventListener('click', handleClick);
       firstCardClicked = null;
@@ -104,7 +114,7 @@ function handleClick(event) {
         gameCards.addEventListener('click', handleClick);
         firstCardClicked = null;
         secondCardClicked = null;
-      }, 1000);
+      }, 800);
     }
   }
 }
@@ -118,11 +128,21 @@ function displayStats() {
 
   var accuracyElement = document.getElementById('accuracy');
   accuracyElement.textContent = `${calcAccuracy(matches,attempts)}%`;
-
 }
-
 function calcAccuracy(matches, attempts) {
   return matches/attempts ? Math.trunc(matches/attempts*100) : 0;
+}
+
+function playCharacterCall(character) {
+  var audioSrc = `./assets/audio/characters/${character}.wav`;
+  var audio = new Audio(audioSrc);
+  audio.play();
+}
+function playVictory() {
+  var audio = new Audio(`./assets/audio/victory.wav`)
+  setTimeout(() => {
+    audio.play()
+  }, 1500);
 }
 
 function resetGame() {

@@ -7,24 +7,29 @@
   <link rel="stylesheet" href="./assets/css/card-logos.css">
   <link rel="stylesheet" href="./assets/css/font.css">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <title>Memory Match</title>
+  <title>Super Match Bros.</title>
 </head>
 <body>
   <div class="container">
     <div class="row title">
       <header>
-        <img class="title-text" src="./assets/images/title.png" alt="title">
+        <img class="title-text" src="./assets/images/title2.png" alt="title">
       </header>
     </div>
     <div class="row content">
       <aside class="col-2"">
-        <div class="box">Stats</div>
-        <div class="box">Games Played</div>
-        <div class="box" id="gamesPlayed">0</div>
-        <div class="box">Attempts</div>
-        <div class="box" id="attempts">0</div>
-        <div class="box">Accuracy</div>
-        <div class="box" id="accuracy">0%</div>
+        <div class="box blue">
+          Games Played
+          <span class="span" id="gamesPlayed">0</span>
+        </div>
+        <div class="box green">
+          Attempts
+          <span class="span" id="attempts">0</span>
+        </div>
+        <div class="box orange">
+          Accuracy
+          <span class="span" id="accuracy">0%</span>
+        </div>
       </aside>
       <main class="col-10" id="gameCards">
       </main>
@@ -33,7 +38,8 @@
   <div class="modal hidden">
       <h2>Congratulations! You won!</h2>
       <button id="reset">Would you like to Play Again?</button>
+      <img class="victory-pose" src="" alt="">
   </div>
-  <script src="/assets/js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>

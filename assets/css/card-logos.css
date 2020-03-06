@@ -1,27 +1,48 @@
-.css-logo {
-  background-image: url('/assets/images/css-logo.png');
+.captfalcon {
+  background-image: url('../images/characters/captfalcon.png');
+  background-color: white;
 }
-.docker-logo {
-  background-image: url('/assets/images/docker-logo.jpg');
+.dk {
+  background-image: url('../images/characters/dk.png');
+  background-color:white;
 }
-.github-logo {
-  background-image: url('/assets/images/gitHub-logo.png');
+.fox {
+  background-image: url('../images/characters/fox.png');
+  background-color:white;
 }
-.html-logo {
-  background-image: url('/assets/images/html-logo.png');
+.jigglypuff {
+  background-image: url('../images/characters/jigglypuff.png');
+  background-color:white;
 }
-.js-logo {
-  background-image: url('/assets/images/js-logo.png');
+.kirby {
+  background-image: url('../images/characters/kirby.png');
+  background-color:white;
 }
-.mysql-logo {
-  background-image: url('/assets/images/mysql-logo.jpg');
+.link {
+  background-image: url('../images/characters/link.png');
+  background-color:white;
 }
-.node-logo {
-  background-image: url('/assets/images/node-logo.png');
+.luigi {
+  background-image: url('../images/characters/luigi.png');
+  background-color:white;
 }
-.php-logo {
-  background-image: url('/assets/images/php-logo.jpeg');
+.mario {
+  background-image: url('../images/characters/mario.png');
+  background-color:white;
 }
-.react-logo {
-  background-image: url('/assets/images/react-logo.png');
+.ness {
+  background-image: url('../images/characters/ness.png');
+  background-color:white;
+}
+.pikachu {
+  background-image: url('../images/characters/pikachu.png');
+  background-color:white;
+}
+.samus {
+  background-image: url('../images/characters/samus.png');
+  background-color:white;
+}
+.yoshi {
+  background-image: url('../images/characters/yoshi.png');
+  background-color:white;
 }

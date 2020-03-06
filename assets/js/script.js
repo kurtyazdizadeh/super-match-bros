@@ -1,35 +1,38 @@
 var firstCardClicked = null,
     firstCardClasses = null,
+    firstCardContainer = null,
     secondCardClicked = null,
     secondCardClasses = null,
+    secondCardContainer = null,
     maxMatches = 9,
     matches = 0,
     attempts = 0,
     gamesPlayed = 0,
     gameCards = document.getElementById('gameCards'),
     modal = document.querySelector('.modal'),
+    victoryPose = document.querySelector('.victory-pose'),
     resetButton = document.getElementById('reset');
 
 
 var cardFrontImages = [
-  'css-logo',
-  'docker-logo',
-  'github-logo',
-  'html-logo',
-  'js-logo',
-  'mysql-logo',
-  'node-logo',
-  'php-logo',
-  'react-logo',
-  'css-logo',
-  'docker-logo',
-  'github-logo',
-  'html-logo',
-  'js-logo',
-  'mysql-logo',
-  'node-logo',
-  'php-logo',
-  'react-logo'
+  'captfalcon',
+  'dk',
+  'fox',
+  'kirby',
+  'link',
+  'luigi',
+  'mario',
+  'pikachu',
+  'samus',
+  'captfalcon',
+  'dk',
+  'fox',
+  'kirby',
+  'link',
+  'luigi',
+  'mario',
+  'pikachu',
+  'samus',
 ]
 
 function shuffleCards() {
@@ -39,19 +42,22 @@ function shuffleCards() {
     cardFrontImages[i] = cardFrontImages[randomNum];
     cardFrontImages[randomNum] = placeholder;
   }
-  buildCardsOnDOM();
+  renderCards();
 }
-function buildCardsOnDOM() {
+function renderCards() {
   for(var j = 0; j < cardFrontImages.length; j++){
     var cardContainer = document.createElement('div');
+    var cardFlip = document.createElement('div');
     var cardBack = document.createElement('div');
     var cardFront = document.createElement('div');
 
     cardContainer.classList.add('card', 'col-2');
+    cardFlip.classList.add('card-flip');
     cardBack.classList.add('card-back');
     cardFront.classList.add('card-front', cardFrontImages[j]);
 
-    cardContainer.append(cardFront, cardBack);
+    cardContainer.appendChild(cardFlip);
+    cardFlip.append(cardFront, cardBack);
     gameCards.appendChild(cardContainer);
   }
 }
@@ -66,14 +72,16 @@ function handleClick(event) {
     return;
   }
 
-  event.target.classList.add('hidden');
+  event.target.parentElement.classList.add('card-revealed');
 
   if (!firstCardClicked) {
     firstCardClicked = event.target;
     firstCardClasses = firstCardClicked.previousElementSibling.className;
+    firstCardContainer = event.target.parentElement;
   } else if (firstCardClicked) {
     secondCardClicked = event.target;
     secondCardClasses = secondCardClicked.previousElementSibling.className;
+    secondCardContainer = event.target.parentElement;
 
     gameCards.removeEventListener('click', handleClick);
 
@@ -81,8 +89,17 @@ function handleClick(event) {
       matches++;
       attempts++;
       displayStats();
+      var character = firstCardClasses.slice(11);
+      playCharacterCall(character);
+
       if (matches === maxMatches){
+        victoryPose.src = `./assets/images/${character}.png`;
+        victoryPose.alt = `${character} posing`;
         modal.classList.remove('hidden');
+        setTimeout(()=>{
+          modal.classList.add('opacity');
+        })
+        playVictory();
       }
       gameCards.addEventListener('click', handleClick);
       firstCardClicked = null;
@@ -92,12 +109,12 @@ function handleClick(event) {
       attempts++;
       displayStats();
       setTimeout(() => {
-        firstCardClicked.classList.remove('hidden');
-        secondCardClicked.classList.remove('hidden');
+        firstCardContainer.classList.remove('card-revealed');
+        secondCardContainer.classList.remove('card-revealed');
         gameCards.addEventListener('click', handleClick);
         firstCardClicked = null;
         secondCardClicked = null;
-      }, 1000);
+      }, 800);
     }
   }
 }
@@ -111,11 +128,21 @@ function displayStats() {
 
   var accuracyElement = document.getElementById('accuracy');
   accuracyElement.textContent = `${calcAccuracy(matches,attempts)}%`;
-
 }
-
 function calcAccuracy(matches, attempts) {
   return matches/attempts ? Math.trunc(matches/attempts*100) : 0;
+}
+
+function playCharacterCall(character) {
+  var audioSrc = `./assets/audio/characters/${character}.wav`;
+  var audio = new Audio(audioSrc);
+  audio.play();
+}
+function playVictory() {
+  var audio = new Audio(`./assets/audio/victory.wav`)
+  setTimeout(() => {
+    audio.play()
+  }, 1500);
 }
 
 function resetGame() {
@@ -131,4 +158,4 @@ function resetGame() {
 
 gameCards.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
-shuffleCards();
+window.addEventListener('DOMContentLoaded', shuffleCards);

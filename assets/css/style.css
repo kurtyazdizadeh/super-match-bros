@@ -1,8 +1,19 @@
+body {
+  font-family: 'super_smash_4.1regular';
+}
 .title {
-  height: 10%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.title-text {
+  margin: 2rem 0;
+  width: 75%;
+  filter: drop-shadow(8px 8px 10px #545454);
 }
 .content {
-  height: 90%;
+  height: 75%;
 }
 aside {
   display: flex;
@@ -12,37 +23,67 @@ aside {
 }
 aside > .box {
   background-color: #87ceeb;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100px;
   font-size: 1.25rem;
-  padding: 1rem 0;
+  text-shadow: 2px 2px 5px grey;
+  filter: drop-shadow(8px 8px 10px #545454)
+}
+.span {
+  display: block;
+  font-weight: bolder;
 }
 main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   height: 90%;
-  padding: auto;
 }
+
 .card {
   height: 30%;
   position: relative;
+  background-color: transparent;
+  perspective: 1000px;
+}
+.card-flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.card-revealed {
+  transform: rotateY(180deg);
 }
 .card-back {
-  background-image: url('/assets/images/lfz-card.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-image: url('../images/logo2.png');
+  background-size: 65%;
+  background-color: black;
+}
+.card-front {
+  transform: rotateY(180deg);
+  background-size: 100% 100%;
 }
 .card-front,
 .card-back {
   height: 100%;
   width: 100%;
+  position: absolute;
+  background-position: center;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+}
+
+.modal {
+  background-image: url('../images/bg/bg_yellow.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-}
-.modal {
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
   position: fixed;
   top: 25%;
   bottom: 25%;
@@ -50,8 +91,12 @@ main {
   right: 25%;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding-left: 25px;
+  opacity: 0;
+  transition: opacity 1s ease-in;
 }
 .modal > button {
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
@@ -64,7 +109,42 @@ main {
 .modal > button {
   cursor: pointer;
 }
-
+.victory-pose {
+  width: 50%;
+}
+.opacity {
+  opacity: 1;
+}
 .hidden {
   display: none;
+}
+
+
+.blue {
+  background-image: url('../images/bg/bg_blue.jpg');
+  background-size: 100% 100%;
+}
+.green {
+  background-image: url('../images/bg/bg_green.jpg');
+  background-size: 100% 100%;
+}
+.orange {
+  background-image: url('../images/bg/bg_orange.jpg');
+  background-size: 100% 100%;
+}
+.purple {
+  background-image: url('../images/bg/bg_purple.jpg');
+  background-size: 100% 100%;
+}
+.red {
+  background-image: url('../images/bg/bg_red.jpg');
+  background-size: 100% 100%;
+}
+.teal {
+  background-image: url('../images/bg/bg_teal.jpg');
+  background-size: 100% 100%;
+}
+.yellow {
+    background-image: url('../images/bg/bg_yellow.jpg');
+    background-size: 100% 100%;
 }

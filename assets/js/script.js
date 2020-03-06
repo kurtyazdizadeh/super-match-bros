@@ -8,9 +8,13 @@ var firstCardClicked = null,
     matches = 0,
     attempts = 0,
     gamesPlayed = 0,
+    seconds = 60,
+    time = null;
+    timerDisplay = document.getElementById('timer'),
     gameCards = document.getElementById('gameCards'),
     modal = document.querySelector('.modal'),
-    victoryPose = document.querySelector('.victory-pose'),
+    modalText = document.querySelector('.modal-text'),
+    pose = document.querySelector('.pose'),
     resetButton = document.getElementById('reset');
 
 
@@ -93,13 +97,7 @@ function handleClick(event) {
       playCharacterCall(character);
 
       if (matches === maxMatches){
-        victoryPose.src = `./assets/images/${character}.png`;
-        victoryPose.alt = `${character} posing`;
-        modal.classList.remove('hidden');
-        setTimeout(()=>{
-          modal.classList.add('opacity');
-        })
-        playVictory();
+        endGame('win', character);
       }
       gameCards.addEventListener('click', handleClick);
       firstCardClicked = null;
@@ -117,6 +115,43 @@ function handleClick(event) {
       }, 800);
     }
   }
+}
+
+function endGame(gameState, character) {
+  var color = 'green';
+  var text = 'Congratulations, you won!';
+
+  if (gameState === 'lose') {
+    character = 'hand';
+    color = 'red';
+    text = 'Sorry, you lose!';
+    playEndGame('failure');
+  } else {
+    playEndGame('victory');
+  }
+
+  pose.src = `./assets/images/${character}.png`;
+  pose.alt = `${character} posing`;
+  modal.classList.add(color);
+  modalText.textContent = text;
+  modal.classList.remove('hidden');
+  setTimeout(() => {
+    modal.classList.add('opacity');
+  })
+}
+
+function startTimer() {
+  time = setInterval(() => {
+    seconds--;
+    if (!seconds) {
+      clearInterval(time);
+      if (matches < 9) {
+        endGame('lose');
+      }
+    }
+    timerDisplay.textContent =
+      `0:${seconds.toLocaleString(undefined,{minimumIntegerDigits: 2})}`;
+  }, 1000)
 }
 
 function displayStats() {
@@ -138,8 +173,8 @@ function playCharacterCall(character) {
   var audio = new Audio(audioSrc);
   audio.play();
 }
-function playVictory() {
-  var audio = new Audio(`./assets/audio/victory.wav`)
+function playEndGame(sound) {
+  var audio = new Audio(`./assets/audio/${sound}.wav`)
   setTimeout(() => {
     audio.play()
   }, 1500);
@@ -149,11 +184,13 @@ function resetGame() {
   gamesPlayed++;
   attempts = 0;
   matches = 0;
-  modal.classList.remove('opacity');
-  modal.classList.add('hidden');
+  seconds = 60;
+  modal.className = 'modal hidden';
+  clearInterval(time);
   displayStats();
   deleteCards();
   shuffleCards();
+  startTimer();
 }
 
 

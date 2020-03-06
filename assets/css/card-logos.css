@@ -1,48 +1,48 @@
 .captfalcon {
   background-image: url('../images/characters/captfalcon.png');
-  background-color: white;
+  background-color: yellow;
 }
 .dk {
   background-image: url('../images/characters/dk.png');
-  background-color:white;
+  background-color:red;
 }
 .fox {
   background-image: url('../images/characters/fox.png');
-  background-color:white;
+  background-color:purple;
 }
 .jigglypuff {
   background-image: url('../images/characters/jigglypuff.png');
-  background-color:white;
+  background-color:pink;
 }
 .kirby {
   background-image: url('../images/characters/kirby.png');
-  background-color:white;
+  background-color: blueviolet
 }
 .link {
   background-image: url('../images/characters/link.png');
-  background-color:white;
+  background-color:chocolate;
 }
 .luigi {
   background-image: url('../images/characters/luigi.png');
-  background-color:white;
+  background-color:orange;
 }
 .mario {
   background-image: url('../images/characters/mario.png');
-  background-color:white;
+  background-color:seagreen;
 }
 .ness {
   background-image: url('../images/characters/ness.png');
-  background-color:white;
+  background-color:cornsilk;
 }
 .pikachu {
   background-image: url('../images/characters/pikachu.png');
-  background-color:white;
+  background-color:cyan;
 }
 .samus {
   background-image: url('../images/characters/samus.png');
-  background-color:white;
+  background-color: thistle
 }
 .yoshi {
   background-image: url('../images/characters/yoshi.png');
-  background-color:white;
+  background-color: plum;
 }

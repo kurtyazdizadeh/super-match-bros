@@ -2,6 +2,7 @@ body {
   font-family: 'Smash_Menu';
   color: white;
   text-shadow: 2px 1px 0px black;
+  /* height: 97vh; */
 }
 .title {
   height: 25%;
@@ -12,7 +13,7 @@ body {
 .title-text {
   margin: 2rem 0;
   width: 75%;
-  filter: drop-shadow(8px 8px 10px #545454);
+  filter: drop-shadow(5px 5px 5px #606060);
 }
 .content {
   height: 75%;
@@ -20,8 +21,6 @@ body {
 .card-area {
   position: relative;
 }
-
-
 
 .game-settings {
   position: absolute;
@@ -44,7 +43,7 @@ body {
   width: 100%;
 }
 .game-settings .form {
-  background-color: #D7DFE4;
+  background: linear-gradient(125deg, #304149 30%, #D7DFE4 30%);
   border: 2px solid black;
   text-shadow: 1px 1px 0px black;
   box-shadow: 2px 2px 5px #505050;
@@ -67,6 +66,18 @@ body {
   font-size: .8rem;
   margin: 0;
 }
+.character-select {
+  flex-basis: 60%;
+}
+.character-select > img {
+  width: 45px;
+  filter: grayscale(1);
+}
+.character-select > img:hover {
+  filter: grayscale(0);
+}
+
+
 .music-buttons,
 .sfx-buttons {
   flex-basis: 50%;
@@ -103,6 +114,7 @@ aside > .box {
   justify-content: center;
   height: 100px;
   font-size: 1.25rem;
+  border: 5px solid black;
   box-shadow: 5px 5px#505050;
 }
 .span {
@@ -181,7 +193,7 @@ main {
 }
 .modal > button {
   border-radius: 140px 0px 140px 0px;
-  border: 8px solid black;
+  border: 7px solid black;
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
   color: white;
   font-family: inherit;
@@ -231,4 +243,11 @@ main {
 .yellow {
   background-image: url('../images/bg/bg_yellow.jpg');
   background-size: 100% 100%;
+}
+
+audio {
+  position: fixed;
+  top: 0;
+  right: 0;
+  opacity: 0.25;
 }

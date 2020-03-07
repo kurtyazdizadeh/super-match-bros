@@ -4,9 +4,11 @@ var firstCardClicked = null,
     secondCardClicked = null,
     secondCardClasses = null,
     secondCardContainer = null,
+    bgMusic = new Audio('./assets/audio/bgMusic.mp3'),
     maxMatches = 9,
     matches = 0,
     attempts = 0,
+    sfxOn = false,
     gamesPlayed = 0,
     seconds = 60,
     time = null,
@@ -23,6 +25,13 @@ var firstCardClicked = null,
     sfxOff = document.getElementById('sfxOff'),
     sfxOn = document.getElementById('sfxOn'),
     startGameButton = document.getElementById('startGame');
+
+
+  bgMusic.volume = 0.33;
+  bgMusic.setAttribute('controls', true);
+  bgMusic.setAttribute('loop', true);
+  document.body.appendChild(bgMusic);
+
 
 
 var cardFrontImages = [
@@ -72,15 +81,11 @@ function renderCards() {
     gameCards.appendChild(cardContainer);
   }
 }
-
-
-
 function deleteCards() {
   while (gameCards.firstElementChild){
     gameCards.removeChild(gameCards.lastElementChild)
   }
 }
-
 function handleClick(event) {
   if (event.target.className.indexOf('card-back') === -1){
     return;
@@ -104,8 +109,9 @@ function handleClick(event) {
       attempts++;
       displayStats();
       var character = firstCardClasses.slice(11);
-      playCharacterCall(character);
-
+      if (sfxOn){
+        playCharacterCall(character);
+      }
       if (matches === maxMatches){
         endGame('win', character);
       }
@@ -135,12 +141,13 @@ function endGame(gameState, character) {
     character = 'hand';
     color = 'red';
     text = 'Sorry, you lose!';
-    playEndGame('failure');
+    if (sfxOn) playEndGame('failure');
   } else {
-    playEndGame('victory');
+    if (sfxOn) playEndGame('victory');
   }
 
-  pose.src = `./assets/images/${character}.png`;
+  clearInterval(time);
+  pose.src = `./assets/images/pose/${character}.png`;
   pose.alt = `${character} posing`;
   modal.classList.add(color);
   modalText.textContent = text;
@@ -183,7 +190,7 @@ function playCharacterCall(character) {
   audio.play();
 }
 function playEndGame(sound) {
-  var audio = new Audio(`./assets/audio/${sound}.wav`)
+  var audio = new Audio(`./assets/audio/${sound}.wav`);
   setTimeout(() => {
     audio.play()
   }, 1500);
@@ -203,19 +210,41 @@ function resetGame() {
 }
 
 function toggleSound (event) {
-  if (event.target.classList.contains('enabled')){
+  var target = event.target;
+  var nextSibling = event.target.nextElementSibling;
+  var prevSibling = event.target.previousElementSibling;
+  var selectSound = new Audio('./assets/audio/select.wav');
+
+  if (target.classList.contains('enabled')){
     return;
   }
 
-  event.target.classList.toggle('enabled');
-  event.target.classList.toggle('disabled');
+  target.classList.toggle('enabled');
+  target.classList.toggle('disabled');
 
-  if(event.target.nextElementSibling){
-    event.target.nextElementSibling.classList.toggle('enabled');
-    event.target.nextElementSibling.classList.toggle('disabled');
+  switch (target.id) {
+    case 'musicOn':
+      bgMusic.play();
+      break;
+    case 'musicOff':
+      bgMusic.pause();
+      break;
+    case 'sfxOff':
+      sfxOn = false;
+      break;
+    case 'sfxOn':
+      sfxOn = true;
+      selectSound.play();
+      break;
+  }
+
+
+  if(nextSibling){
+    nextSibling.classList.toggle('enabled');
+    nextSibling.classList.toggle('disabled');
   } else {
-    event.target.previousElementSibling.classList.toggle('enabled');
-    event.target.previousElementSibling.classList.toggle('disabled');
+    prevSibling.classList.toggle('enabled');
+    prevSibling.classList.toggle('disabled');
   }
 }
 
@@ -233,4 +262,3 @@ musicOn.addEventListener('click', toggleSound);
 sfxOff.addEventListener('click', toggleSound);
 sfxOn.addEventListener('click', toggleSound);
 startGameButton.addEventListener('click', startGame);
-// window.addEventListener('DOMContentLoaded', shuffleCards);

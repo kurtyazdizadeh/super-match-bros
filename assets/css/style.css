@@ -17,6 +17,78 @@ body {
 .content {
   height: 75%;
 }
+.card-area {
+  position: relative;
+}
+
+
+
+.game-settings {
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 15%;
+  right: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 4px solid black;
+  box-shadow: 5px 5px#505050;
+}
+.game-settings > h2 {
+  margin: 0;
+  margin-bottom: 1rem;
+  background-color: #272727;
+  text-align: center;
+  width: 100%;
+}
+.game-settings .form {
+  background-color: #D7DFE4;
+  border: 2px solid black;
+  text-shadow: 1px 1px 0px black;
+  box-shadow: 2px 2px 5px #505050;
+  width: 85%;
+}
+.game-settings button {
+  font-size: .8rem;
+}
+.form-1,
+.form-2,
+.form-3 {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: .5rem 0;
+}
+.game-settings h3{
+  flex-basis: 20%;
+  font-size: .8rem;
+  margin: 0;
+}
+.music-buttons,
+.sfx-buttons {
+  flex-basis: 50%;
+}
+.enabled,
+.disabled {
+  font-family: inherit;
+  border-radius: 3px;
+  width: 49%;
+}
+.enabled {
+  background-color: #FFC701;
+  border: 2px solid black;
+  box-shadow: 2px 2px #505050;
+}
+.disabled {
+  background-color: #B8C3C7;
+  color: #8F9095;
+}
+.start-button {
+  margin-top: 1rem;
+}
 aside {
   display: flex;
   flex-direction: column;
@@ -31,7 +103,7 @@ aside > .box {
   justify-content: center;
   height: 100px;
   font-size: 1.25rem;
-  box-shadow:8px 8px 10px #545454;
+  box-shadow: 5px 5px#505050;
 }
 .span {
   display: block;
@@ -69,7 +141,7 @@ main {
   transform: rotateY(180deg);
 }
 .card-back {
-  background-image: url('../images/logo2.png');
+  background-image: url('../images/logo.png');
   background-size: 65%;
   background-color: black;
 }
@@ -113,10 +185,11 @@ main {
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
   color: white;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 1.25rem;
   width: 50%;
   height: 25%;
   cursor: pointer;
+    box-shadow:5px 5px #505050;
 }
 
 .pose {

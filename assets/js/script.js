@@ -9,13 +9,20 @@ var firstCardClicked = null,
     attempts = 0,
     gamesPlayed = 0,
     seconds = 60,
-    time = null;
+    time = null,
     timerDisplay = document.getElementById('timer'),
     gameCards = document.getElementById('gameCards'),
+    stats = document.getElementById('stats'),
     modal = document.querySelector('.modal'),
     modalText = document.querySelector('.modal-text'),
     pose = document.querySelector('.pose'),
-    resetButton = document.getElementById('reset');
+    resetButton = document.getElementById('reset'),
+    gameSettings = document.querySelector('.game-settings'),
+    musicOff = document.getElementById('musicOff'),
+    musicOn = document.getElementById('musicOn'),
+    sfxOff = document.getElementById('sfxOff'),
+    sfxOn = document.getElementById('sfxOn'),
+    startGameButton = document.getElementById('startGame');
 
 
 var cardFrontImages = [
@@ -65,6 +72,9 @@ function renderCards() {
     gameCards.appendChild(cardContainer);
   }
 }
+
+
+
 function deleteCards() {
   while (gameCards.firstElementChild){
     gameCards.removeChild(gameCards.lastElementChild)
@@ -167,7 +177,6 @@ function displayStats() {
 function calcAccuracy(matches, attempts) {
   return matches/attempts ? Math.trunc(matches/attempts*100) : 0;
 }
-
 function playCharacterCall(character) {
   var audioSrc = `./assets/audio/characters/${character}.wav`;
   var audio = new Audio(audioSrc);
@@ -179,13 +188,13 @@ function playEndGame(sound) {
     audio.play()
   }, 1500);
 }
-
 function resetGame() {
   gamesPlayed++;
   attempts = 0;
   matches = 0;
   seconds = 60;
   modal.className = 'modal hidden';
+  timerDisplay.textContent = '1:00';
   clearInterval(time);
   displayStats();
   deleteCards();
@@ -193,7 +202,35 @@ function resetGame() {
   startTimer();
 }
 
+function toggleSound (event) {
+  if (event.target.classList.contains('enabled')){
+    return;
+  }
+
+  event.target.classList.toggle('enabled');
+  event.target.classList.toggle('disabled');
+
+  if(event.target.nextElementSibling){
+    event.target.nextElementSibling.classList.toggle('enabled');
+    event.target.nextElementSibling.classList.toggle('disabled');
+  } else {
+    event.target.previousElementSibling.classList.toggle('enabled');
+    event.target.previousElementSibling.classList.toggle('disabled');
+  }
+}
+
+function startGame() {
+  gameSettings.classList.add('hidden');
+  stats.classList.remove('hidden');
+  startTimer();
+  shuffleCards();
+}
 
 gameCards.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
-window.addEventListener('DOMContentLoaded', shuffleCards);
+musicOff.addEventListener('click', toggleSound);
+musicOn.addEventListener('click', toggleSound);
+sfxOff.addEventListener('click', toggleSound);
+sfxOn.addEventListener('click', toggleSound);
+startGameButton.addEventListener('click', startGame);
+// window.addEventListener('DOMContentLoaded', shuffleCards);

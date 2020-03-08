@@ -4,11 +4,12 @@ var firstCardClicked = null,
     secondCardClicked = null,
     secondCardClasses = null,
     secondCardContainer = null,
+    chosenCharacters = [],
     bgMusic = new Audio('./assets/audio/bgMusic.mp3'),
     maxMatches = 9,
     matches = 0,
     attempts = 0,
-    sfxOn = false,
+    sfx = false,
     gamesPlayed = 0,
     seconds = 60,
     time = null,
@@ -20,6 +21,7 @@ var firstCardClicked = null,
     pose = document.querySelector('.pose'),
     resetButton = document.getElementById('reset'),
     gameSettings = document.querySelector('.game-settings'),
+    characterSelections = document.querySelector('.character-select'),
     musicOff = document.getElementById('musicOff'),
     musicOn = document.getElementById('musicOn'),
     sfxOff = document.getElementById('sfxOff'),
@@ -109,7 +111,7 @@ function handleClick(event) {
       attempts++;
       displayStats();
       var character = firstCardClasses.slice(11);
-      if (sfxOn){
+      if (sfx){
         playCharacterCall(character);
       }
       if (matches === maxMatches){
@@ -141,9 +143,9 @@ function endGame(gameState, character) {
     character = 'hand';
     color = 'red';
     text = 'Sorry, you lose!';
-    if (sfxOn) playEndGame('failure');
+    if (sfx) playEndGame('failure');
   } else {
-    if (sfxOn) playEndGame('victory');
+    if (sfx) playEndGame('victory');
   }
 
   clearInterval(time);
@@ -158,6 +160,10 @@ function endGame(gameState, character) {
 }
 
 function startTimer() {
+  if (sfx){
+    var ready = new Audio('./assets/audio/go.wav');
+    ready.play();
+  }
   time = setInterval(() => {
     seconds--;
     if (!seconds) {
@@ -209,7 +215,7 @@ function resetGame() {
   startTimer();
 }
 
-function toggleSound (event) {
+function toggleSound(event) {
   var target = event.target;
   var nextSibling = event.target.nextElementSibling;
   var prevSibling = event.target.previousElementSibling;
@@ -230,10 +236,10 @@ function toggleSound (event) {
       bgMusic.pause();
       break;
     case 'sfxOff':
-      sfxOn = false;
+      sfx = false;
       break;
     case 'sfxOn':
-      sfxOn = true;
+      sfx = true;
       selectSound.play();
       break;
   }
@@ -248,17 +254,47 @@ function toggleSound (event) {
   }
 }
 
+function selectCharacters(event) {
+  var clickedCharacter = event.target.getAttribute('alt');
+
+  if (clickedCharacter == null) return;
+
+  if (chosenCharacters.includes(clickedCharacter)){
+    chosenCharacters = chosenCharacters.filter(i => i !== clickedCharacter);
+    event.target.classList.toggle('stock-selected');
+  } else {
+    if (chosenCharacters.length < 9){
+      chosenCharacters.push(clickedCharacter);
+      event.target.classList.toggle('stock-selected');
+    }
+  }
+
+  if (chosenCharacters.length < 9){
+    startGameButton.classList.add('disabled');
+    startGameButton.classList.remove('enabled');
+    startGameButton.removeEventListener('click', startGame);
+  } else if (chosenCharacters.length === 9) {
+    startGameButton.classList.add('enabled');
+    startGameButton.classList.remove('disabled');
+    startGameButton.addEventListener('click', startGame);
+  }
+
+}
+
 function startGame() {
   gameSettings.classList.add('hidden');
   stats.classList.remove('hidden');
+  if (chosenCharacters.length === 9){
+    cardFrontImages = chosenCharacters.concat(chosenCharacters);
+  }
   startTimer();
   shuffleCards();
 }
 
 gameCards.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
+characterSelections.addEventListener('click', selectCharacters);
 musicOff.addEventListener('click', toggleSound);
 musicOn.addEventListener('click', toggleSound);
 sfxOff.addEventListener('click', toggleSound);
 sfxOn.addEventListener('click', toggleSound);
-startGameButton.addEventListener('click', startGame);

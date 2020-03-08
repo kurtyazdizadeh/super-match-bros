@@ -69,11 +69,11 @@ body {
 .character-select {
   flex-basis: 60%;
 }
-.character-select > img {
+.character-select > .stock {
   width: 45px;
   filter: grayscale(1);
 }
-.character-select > img:hover {
+.character-select > .stock-selected {
   filter: grayscale(0);
 }
 
@@ -244,6 +244,7 @@ main {
   background-image: url('../images/bg/bg_yellow.jpg');
   background-size: 100% 100%;
 }
+
 
 audio {
   position: fixed;

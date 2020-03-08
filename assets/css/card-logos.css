@@ -34,6 +34,10 @@
   background-image: url('../images/characters/ness.png');
   background-color:cornsilk;
 }
+.peach {
+  background-image: url('../images/characters/peach.png');
+  background-color: slateblue;
+}
 .pikachu {
   background-image: url('../images/characters/pikachu.png');
   background-color:cyan;
@@ -42,7 +46,19 @@
   background-image: url('../images/characters/samus.png');
   background-color: thistle
 }
+.snake {
+  background-image: url('../images/characters/snake.png');
+  background-color: dodgerblue;
+}
+.sonic {
+  background-image: url('../images/characters/sonic.png');
+  background-color: chartreuse;
+}
 .yoshi {
   background-image: url('../images/characters/yoshi.png');
   background-color: plum;
+}
+.zelda {
+  background-image: url('../images/characters/zelda.png');
+  background-color: slategray;
 }

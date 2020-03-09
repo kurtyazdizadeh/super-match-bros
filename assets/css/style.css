@@ -16,7 +16,7 @@ body {
   filter: drop-shadow(5px 5px 5px #606060);
 }
 .content {
-  height: 75%;
+  height: 73%;
 }
 .card-area {
   position: relative;
@@ -191,22 +191,25 @@ main {
 .modal > h2 {
   margin: 0;
 }
-.modal > button {
+.modal > .buttons {
+  text-align: center;
+  width: 50%;
+}
+.modal button {
   border-radius: 140px 0px 140px 0px;
-  border: 7px solid black;
+  border: 6px solid black;
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
   color: white;
   font-family: inherit;
-  font-size: 1.25rem;
-  width: 50%;
-  height: 25%;
+  font-size: 1rem;
+  width: 45%;
   cursor: pointer;
-    box-shadow:5px 5px #505050;
+  box-shadow:5px 5px #505050;
 }
 
 .pose {
-  width: 50%;
-  filter:drop-shadow(5px 5px black);
+  max-width: 500px;
+  filter: drop-shadow(5px 5px black);
 }
 .opacity {
   opacity: 1;

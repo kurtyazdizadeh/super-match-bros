@@ -21,6 +21,7 @@ var firstCardClicked = null,
     pose = document.querySelector('.pose'),
     resetButton = document.getElementById('reset'),
     gameSettings = document.querySelector('.game-settings'),
+    resetSettingsButton = document.getElementById('resetSettings'),
     characterSelections = document.querySelector('.character-select'),
     musicOff = document.getElementById('musicOff'),
     musicOn = document.getElementById('musicOn'),
@@ -57,6 +58,52 @@ var cardFrontImages = [
   'samus',
 ]
 
+function handleClick(event) {
+  if (event.target.className.indexOf('card-back') === -1) {
+    return;
+  }
+
+  event.target.parentElement.classList.add('card-revealed');
+
+  if (!firstCardClicked) {
+    firstCardClicked = event.target;
+    firstCardClasses = firstCardClicked.previousElementSibling.className;
+    firstCardContainer = event.target.parentElement;
+  } else if (firstCardClicked) {
+    secondCardClicked = event.target;
+    secondCardClasses = secondCardClicked.previousElementSibling.className;
+    secondCardContainer = event.target.parentElement;
+
+    gameCards.removeEventListener('click', handleClick);
+
+    if (firstCardClasses === secondCardClasses) {
+      matches++;
+      attempts++;
+      displayStats();
+      var character = firstCardClasses.slice(11);
+      if (sfx) {
+        playCharacterCall(character);
+      }
+      if (matches === maxMatches) {
+        endGame('win', character);
+      }
+      gameCards.addEventListener('click', handleClick);
+      firstCardClicked = null;
+      secondCardClicked = null;
+    }
+    else {
+      attempts++;
+      displayStats();
+      setTimeout(() => {
+        firstCardContainer.classList.remove('card-revealed');
+        secondCardContainer.classList.remove('card-revealed');
+        gameCards.addEventListener('click', handleClick);
+        firstCardClicked = null;
+        secondCardClicked = null;
+      }, 800);
+    }
+  }
+}
 function shuffleCards() {
   for(var i = cardFrontImages.length-1; i > 0; i--){
     var randomNum = Math.floor(Math.random() * i);
@@ -88,53 +135,6 @@ function deleteCards() {
     gameCards.removeChild(gameCards.lastElementChild)
   }
 }
-function handleClick(event) {
-  if (event.target.className.indexOf('card-back') === -1){
-    return;
-  }
-
-  event.target.parentElement.classList.add('card-revealed');
-
-  if (!firstCardClicked) {
-    firstCardClicked = event.target;
-    firstCardClasses = firstCardClicked.previousElementSibling.className;
-    firstCardContainer = event.target.parentElement;
-  } else if (firstCardClicked) {
-    secondCardClicked = event.target;
-    secondCardClasses = secondCardClicked.previousElementSibling.className;
-    secondCardContainer = event.target.parentElement;
-
-    gameCards.removeEventListener('click', handleClick);
-
-    if (firstCardClasses === secondCardClasses) {
-      matches++;
-      attempts++;
-      displayStats();
-      var character = firstCardClasses.slice(11);
-      if (sfx){
-        playCharacterCall(character);
-      }
-      if (matches === maxMatches){
-        endGame('win', character);
-      }
-      gameCards.addEventListener('click', handleClick);
-      firstCardClicked = null;
-      secondCardClicked = null;
-    }
-    else {
-      attempts++;
-      displayStats();
-      setTimeout(() => {
-        firstCardContainer.classList.remove('card-revealed');
-        secondCardContainer.classList.remove('card-revealed');
-        gameCards.addEventListener('click', handleClick);
-        firstCardClicked = null;
-        secondCardClicked = null;
-      }, 800);
-    }
-  }
-}
-
 function endGame(gameState, character) {
   var color = 'green';
   var text = 'Congratulations, you won!';
@@ -158,7 +158,6 @@ function endGame(gameState, character) {
     modal.classList.add('opacity');
   })
 }
-
 function startTimer() {
   if (sfx){
     var ready = new Audio('./assets/audio/go.wav');
@@ -176,7 +175,6 @@ function startTimer() {
       `0:${seconds.toLocaleString(undefined,{minimumIntegerDigits: 2})}`;
   }, 1000)
 }
-
 function displayStats() {
   var gamesPlayedElement = document.getElementById('gamesPlayed');
   gamesPlayedElement.textContent = gamesPlayed;
@@ -214,7 +212,27 @@ function resetGame() {
   shuffleCards();
   startTimer();
 }
+function resetSettings() {
+  clearInterval(time);
+  deleteCards();
+  startGameButton.classList = 'start-button disabled';
+  startGameButton.removeEventListener('click', startGame);
+  modal.classList.add('opacity');
+  modal.classList.add('hidden');
+  stats.classList.add('hidden');
+  gameSettings.classList.remove('hidden');
+  chosenCharacters = [];
 
+  var previousCharacters = gameSettings.children[1].children[1].children;
+
+  for (var i = 0; i < previousCharacters.length; i++) {
+    if (previousCharacters[i].classList.contains('stock-selected')) {
+      previousCharacters[i].classList.remove('stock-selected');
+    }
+  }
+
+  document.getElementsByTagName('main')[0].appendChild(gameSettings);
+}
 function toggleSound(event) {
   var target = event.target;
   var nextSibling = event.target.nextElementSibling;
@@ -253,7 +271,6 @@ function toggleSound(event) {
     prevSibling.classList.toggle('disabled');
   }
 }
-
 function selectCharacters(event) {
   var clickedCharacter = event.target.getAttribute('alt');
 
@@ -270,17 +287,14 @@ function selectCharacters(event) {
   }
 
   if (chosenCharacters.length < 9){
-    startGameButton.classList.add('disabled');
-    startGameButton.classList.remove('enabled');
+    startGameButton.className = 'start-button disabled';
     startGameButton.removeEventListener('click', startGame);
   } else if (chosenCharacters.length === 9) {
-    startGameButton.classList.add('enabled');
-    startGameButton.classList.remove('disabled');
+    startGameButton.className = 'start-button enabled';
     startGameButton.addEventListener('click', startGame);
   }
 
 }
-
 function startGame() {
   gameSettings.classList.add('hidden');
   stats.classList.remove('hidden');
@@ -291,8 +305,10 @@ function startGame() {
   shuffleCards();
 }
 
+
 gameCards.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
+resetSettingsButton.addEventListener('click', resetSettings);
 characterSelections.addEventListener('click', selectCharacters);
 musicOff.addEventListener('click', toggleSound);
 musicOn.addEventListener('click', toggleSound);

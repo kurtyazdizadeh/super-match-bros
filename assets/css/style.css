@@ -221,34 +221,29 @@ main {
   display: none;
 }
 
-
+.bg-size-100 {
+  background-size: 100% 100%;
+}
 .blue {
   background-image: url('../images/bg/bg_blue.jpg');
-  background-size: 100% 100%;
 }
 .green {
   background-image: url('../images/bg/bg_green.jpg');
-  background-size: 100% 100%;
 }
 .orange {
   background-image: url('../images/bg/bg_orange.jpg');
-  background-size: 100% 100%;
 }
 .purple {
   background-image: url('../images/bg/bg_purple.jpg');
-  background-size: 100% 100%;
 }
 .red {
   background-image: url('../images/bg/bg_red.jpg');
-  background-size: 100% 100%;
 }
 .teal {
   background-image: url('../images/bg/bg_teal.jpg');
-  background-size: 100% 100%;
 }
 .yellow {
   background-image: url('../images/bg/bg_yellow.jpg');
-  background-size: 100% 100%;
 }
 
 
@@ -272,7 +267,7 @@ audio {
 
 /* iPad Portrait Mode */
 @media only screen
-  and ( min-device-width:768px)
+  and (min-device-width:768px)
   and (max-device-width: 1024px)
   and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
@@ -282,6 +277,28 @@ audio {
     .title-text {
       width: 60%;
     }
+    .modal {
+      left: 5%;
+      right: 5%;
+    }
+    .pose {
+      width: 365px;
+    }
+  }
+  /* iPad Landscape Mode */
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .modal {
+      left: 5%;
+      right: 5%;
+    }
+    .modal button {
+      font-size: 12px;
+    }
+
   }
 
 /* iPhone 6/7/8 Landscape Mode */
@@ -290,11 +307,18 @@ audio {
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
+    .title-text {
+      margin: 0;
+      width: 30%;
+    }
     .character-select > .stock {
       width: 25px;
     }
     .game-settings > h2 {
       font-size: 15px;
+      margin-bottom: 0;
+    }
+    .game-settings button {
       margin-bottom: 0;
     }
     .form-1,
@@ -305,6 +329,7 @@ audio {
     .game-settings h3 {
       font-size: 10px;
     }
+
   }
 
 
@@ -324,10 +349,7 @@ audio {
 }
 
 @media (max-width: 667px) {
-  .title-text {
-    margin: 1rem 0;
-    width: 30%;
-  }
+
 }
 
 @media (max-width: 561px) {

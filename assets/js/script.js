@@ -293,7 +293,6 @@ function selectCharacters(event) {
     startGameButton.className = 'start-button enabled';
     startGameButton.addEventListener('click', startGame);
   }
-  console.log(chosenCharacters)
 }
 function startGame() {
   seconds = 60;

@@ -293,9 +293,11 @@ function selectCharacters(event) {
     startGameButton.className = 'start-button enabled';
     startGameButton.addEventListener('click', startGame);
   }
-
+  console.log(chosenCharacters)
 }
 function startGame() {
+  seconds = 60;
+  attempts = 0;
   gameSettings.classList.add('hidden');
   stats.classList.remove('hidden');
   if (chosenCharacters.length === 9){
@@ -303,6 +305,7 @@ function startGame() {
   }
   startTimer();
   shuffleCards();
+  displayStats();
 }
 
 

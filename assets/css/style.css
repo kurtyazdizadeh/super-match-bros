@@ -2,7 +2,6 @@ body {
   font-family: 'Smash_Menu';
   color: white;
   text-shadow: 2px 1px 0px black;
-  /* height: 97vh; */
 }
 .title {
   height: 25%;
@@ -34,6 +33,7 @@ body {
   background-color: white;
   border: 4px solid black;
   box-shadow: 5px 5px#505050;
+  overflow: scroll;
 }
 .game-settings > h2 {
   margin: 0;
@@ -41,6 +41,7 @@ body {
   background-color: #272727;
   text-align: center;
   width: 100%;
+
 }
 .game-settings .form {
   background: linear-gradient(125deg, #304149 30%, #D7DFE4 30%);
@@ -51,6 +52,7 @@ body {
 }
 .game-settings button {
   font-size: .8rem;
+  margin-bottom: 1rem;
 }
 .form-1,
 .form-2,
@@ -61,7 +63,7 @@ body {
   align-items: center;
   margin: .5rem 0;
 }
-.game-settings h3{
+.game-settings h3 {
   flex-basis: 20%;
   font-size: .8rem;
   margin: 0;
@@ -86,7 +88,7 @@ body {
 .disabled {
   font-family: inherit;
   border-radius: 3px;
-  width: 49%;
+  width: 48%;
 }
 .enabled {
   background-color: #FFC701;
@@ -202,9 +204,10 @@ main {
   color: white;
   font-family: inherit;
   font-size: 1rem;
-  width: 45%;
+  width: 48%;
   cursor: pointer;
   box-shadow:5px 5px #505050;
+  padding: .5rem;
 }
 
 .pose {
@@ -254,4 +257,86 @@ audio {
   top: 0;
   right: 0;
   opacity: 0.25;
+}
+
+@media (max-width: 1024px) {
+  .game-settings {
+    left: 0%;
+    right: 0%;
+  }
+
+  .character-select > .stock {
+    width: 40px;
+  }
+}
+
+/* iPad Portrait Mode */
+@media only screen
+  and ( min-device-width:768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .title {
+      height: auto;
+    }
+    .title-text {
+      width: 60%;
+    }
+  }
+
+/* iPhone 6/7/8 Landscape Mode */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    .character-select > .stock {
+      width: 25px;
+    }
+    .game-settings > h2 {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+    .form-1,
+    .form-2,
+    .form-3 {
+      padding: 10px;
+    }
+    .game-settings h3 {
+      font-size: 10px;
+    }
+  }
+
+
+
+
+
+@media (max-width: 830px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 740px) {
+
+}
+
+@media (max-width: 667px) {
+  .title-text {
+    margin: 1rem 0;
+    width: 30%;
+  }
+}
+
+@media (max-width: 561px) {
+
+}
+
+@media (max-width: 390px) {
+
+}
+
+@media (max-height: 415px) {
 }

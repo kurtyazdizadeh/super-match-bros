@@ -31,9 +31,9 @@ var startGameButton = document.getElementById('startGame');
 
 
   bgMusic.volume = 0.33;
-  bgMusic.setAttribute('controls', true);
-  bgMusic.setAttribute('loop', true);
-  document.body.appendChild(bgMusic);
+  // bgMusic.setAttribute('controls', true);
+  bgMusic.loop = true;
+  // document.body.appendChild(bgMusic);
 
 
 

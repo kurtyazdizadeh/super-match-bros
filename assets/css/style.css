@@ -141,6 +141,8 @@ main {
 
 .card:hover {
   transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
 }
 
 .card-flip {
@@ -248,11 +250,19 @@ main {
 }
 
 
-audio {
+.volume {
   position: fixed;
   top: 0;
   right: 0;
   opacity: 0.25;
+  width: 50px;
+  height: 50px;
+}
+.volume-off {
+  background-image: url('../images/vol_off.png');
+}
+.volume-on {
+  background-image: url('../images/vol_on.png')
 }
 
 @media (max-width: 1024px) {

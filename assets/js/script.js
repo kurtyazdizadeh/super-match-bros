@@ -9,7 +9,11 @@ var bgMusic = new Audio('./assets/audio/bgMusic.mp3');
 var maxMatches = 9;
 var matches = 0;
 var attempts = 0;
-var sfx = false;
+var sfx = {
+  globalMute: true,
+  userChoseSFX: false,
+  music: false
+};
 var gamesPlayed = 0;
 var seconds = 60;
 var time = null;
@@ -28,14 +32,26 @@ var musicOn = document.getElementById('musicOn');
 var sfxOff = document.getElementById('sfxOff');
 var sfxOn = document.getElementById('sfxOn');
 var startGameButton = document.getElementById('startGame');
-
+var volume = document.getElementsByClassName('volume');
 
   bgMusic.volume = 0.33;
-  // bgMusic.setAttribute('controls', true);
   bgMusic.loop = true;
-  // document.body.appendChild(bgMusic);
+
+volume[0].addEventListener('click', toggleGlobalSound);
+
+function toggleGlobalSound (event) {
+  sfx.globalMute = !sfx.globalMute;
 
 
+  if (sfx.music && bgMusic.paused) {
+    bgMusic.play();
+  } else if (!bgMusic.paused) {
+    bgMusic.pause();
+  }
+
+  volume[0].classList.toggle('volume-off');
+  volume[0].classList.toggle('volume-on');
+}
 
 var cardFrontImages = [
   'captfalcon',
@@ -81,7 +97,7 @@ function handleClick(event) {
       attempts++;
       displayStats();
       var character = firstCardClasses.slice(11);
-      if (sfx) {
+      if (sfx.userChoseSFX && !sfx.globalMute) {
         playCharacterCall(character);
       }
       if (matches === maxMatches) {
@@ -143,9 +159,9 @@ function endGame(gameState, character) {
     character = 'hand';
     color = 'red';
     text = 'Sorry, you lose!';
-    if (sfx) playEndGame('failure');
+    if (sfx.userChoseSFX && !sfx.globalMute) playEndGame('failure');
   } else {
-    if (sfx) playEndGame('victory');
+    if (sfx.userChoseSFX && !sfx.globalMute) playEndGame('victory');
   }
 
   clearInterval(time);
@@ -159,7 +175,7 @@ function endGame(gameState, character) {
   })
 }
 function startTimer() {
-  if (sfx){
+  if (sfx.userChoseSFX && !sfx.globalMute){
     var ready = new Audio('./assets/audio/go.wav');
     ready.play();
   }
@@ -249,15 +265,17 @@ function toggleSound(event) {
   switch (target.id) {
     case 'musicOn':
       bgMusic.play();
+      sfx.music = true;
       break;
     case 'musicOff':
       bgMusic.pause();
+      sfx.music = false;
       break;
     case 'sfxOff':
-      sfx = false;
+      sfx.userChoseSFX = false;
       break;
     case 'sfxOn':
-      sfx = true;
+      sfx.userChoseSFX = true;
       selectSound.play();
       break;
   }
@@ -270,6 +288,14 @@ function toggleSound(event) {
     prevSibling.classList.toggle('enabled');
     prevSibling.classList.toggle('disabled');
   }
+
+  if (musicOn.classList.contains('enabled') || sfx.userChoseSFX) {
+    volume[0].className = 'volume volume-on bg-size-100';
+  }
+  if (musicOff.classList.contains('enabled') && !sfx.userChoseSFX) {
+    volume[0].className = 'volume volume-off bg-size-100';
+  }
+
 }
 function selectCharacters(event) {
   var clickedCharacter = event.target.getAttribute('alt');

@@ -40,8 +40,8 @@ var volume = document.getElementsByClassName('volume');
 volume[0].addEventListener('click', toggleGlobalSound);
 
 function toggleGlobalSound (event) {
+  var volumeClassStr = 'volume bg-size-100 ';
   sfx.globalMute = !sfx.globalMute;
-
 
   if (sfx.music && bgMusic.paused) {
     bgMusic.play();
@@ -49,8 +49,11 @@ function toggleGlobalSound (event) {
     bgMusic.pause();
   }
 
-  volume[0].classList.toggle('volume-off');
-  volume[0].classList.toggle('volume-on');
+  if (sfx.globalMute) {
+    volume[0].className = volumeClassStr + 'volume-off';
+  } else {
+    volume[0].className = volumeClassStr + 'volume-on';
+  }
 }
 
 var cardFrontImages = [

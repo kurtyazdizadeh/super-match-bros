@@ -21,6 +21,10 @@ body {
   position: relative;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .game-settings {
   position: absolute;
   top: 0%;
@@ -94,6 +98,7 @@ body {
   background-color: #FFC701;
   border: 2px solid black;
   box-shadow: 2px 2px #505050;
+  cursor: pointer;
 }
 .disabled {
   background-color: #B8C3C7;

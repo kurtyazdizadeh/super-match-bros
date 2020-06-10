@@ -130,6 +130,7 @@ aside > .box {
   font-size: 1.25rem;
   border: 5px solid black;
   box-shadow: 5px 5px#505050;
+  text-align: center;
 }
 .span {
   display: block;
@@ -358,6 +359,9 @@ main {
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
+    .title {
+      height: 18%;
+    }
     .title-text {
       margin: 0;
       width: 30%;
@@ -391,5 +395,66 @@ main {
     }
     .pose {
       width: 250px;
+    }
+    main {
+      height: 100%;
+    }
+    aside {
+      display: none;
+    }
+
+     .iphone-col-12 {
+      width: 95%;
+      height: 107%;
+    }
+  }
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    * {
+      font-size: .8rem;
+    }
+    .game-settings .form {
+      background: linear-gradient(106deg, #304149 35%, #D7DFE4 30%);
+    }
+    .title {
+      height: 13%;
+    }
+    .title-text {
+      margin-bottom: 0;
+    }
+    .modal {
+      top: 10%;
+      bottom: 10%;
+      left: 5%;
+      right: 5%;
+      padding-left: 0;
+
+    }
+    .pose {
+      max-width: 300px;
+    }
+    .modal > .buttons {
+      width: 95%;
+    }
+    .modal-text {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    aside {
+      flex-direction: row;
+      height: auto;
+      display:none;
+    }
+    .iphone-col-3 {
+      width: calc(100%/3);
+      height: 20%;
+      margin-bottom: 4px;
+    }
+    .iphone-menu {
+      width: 95%;
+      margin: auto;
     }
   }

@@ -139,7 +139,7 @@ function renderCards() {
     var cardBack = document.createElement('div');
     var cardFront = document.createElement('div');
 
-    cardContainer.classList.add('card', 'col-2');
+    cardContainer.classList.add('card', 'col-2', 'iphone-col-3');
     cardFlip.classList.add('card-flip');
     cardBack.classList.add('card-back');
     cardFront.classList.add('card-front', cardFrontImages[j]);

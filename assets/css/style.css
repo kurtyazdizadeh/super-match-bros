@@ -78,11 +78,17 @@ body {
 .character-select > .stock {
   width: 45px;
   filter: grayscale(1);
+  transition: transform .5s ease;
 }
 .character-select > .stock-selected {
   filter: grayscale(0);
+  transition: transform .5s ease;
 }
 
+.character-select > .stock:hover,
+.character-select > .stock-selected:hover {
+  transform: scale(1.15);
+}
 
 .music-buttons,
 .sfx-buttons {

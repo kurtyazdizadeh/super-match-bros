@@ -40,7 +40,7 @@ var volume = document.getElementsByClassName('volume');
 volume[0].addEventListener('click', toggleGlobalSound);
 
 function toggleGlobalSound (event) {
-  var volumeClassStr = 'volume bg-size-100 ';
+  var volumeClassStr = 'volume bg-size-100 pointer ';
   sfx.globalMute = !sfx.globalMute;
 
   if (sfx.music && bgMusic.paused) {
@@ -293,10 +293,10 @@ function toggleSound(event) {
   }
 
   if (musicOn.classList.contains('enabled') || sfx.userChoseSFX) {
-    volume[0].className = 'volume volume-on bg-size-100';
+    volume[0].className = 'volume volume-on bg-size-100 pointer';
   }
   if (musicOff.classList.contains('enabled') && !sfx.userChoseSFX) {
-    volume[0].className = 'volume volume-off bg-size-100';
+    volume[0].className = 'volume volume-off bg-size-100 pointer';
   }
 
 }
